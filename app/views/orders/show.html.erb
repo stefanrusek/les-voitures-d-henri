@@ -91,6 +91,41 @@
                 <%= simple_format(@order.customer_address) %>
               </div>
             </div>
+
+            <% if @order.delivery_scheduled? %>
+              <div class="detail-group">
+                <strong>Statut de livraison:</strong>
+                <span class="delivery-status <%= @order.delivery_status&.downcase %>">
+                  <%= @order.delivery_status_display %>
+                </span>
+              </div>
+
+              <% if @order.dolly_order_id.present? %>
+                <div class="detail-group">
+                  <strong>ID de livraison:</strong>
+                  <span><%= @order.dolly_order_id %></span>
+                </div>
+              <% end %>
+
+              <% if @order.delivery_tracking_url.present? %>
+                <div class="detail-group">
+                  <strong>Informations de suivi:</strong>
+                  <span><%= @order.delivery_tracking_url %></span>
+                </div>
+              <% end %>
+            <% elsif @order.delivery_error_message.present? %>
+              <div class="detail-group">
+                <strong>Statut de livraison:</strong>
+                <span class="delivery-status error">
+                  Erreur de planification: <%= @order.delivery_error_message %>
+                </span>
+              </div>
+            <% else %>
+              <div class="detail-group">
+                <strong>Statut de livraison:</strong>
+                <span class="delivery-status pending">En cours de planification...</span>
+              </div>
+            <% end %>
           </div>
         </div>
 
