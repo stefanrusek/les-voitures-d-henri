@@ -9,6 +9,23 @@ Rails.application.routes.draw do
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  # Root route - home page
+  root "home#index"
+
+  # Car routes
+  get "car", to: "cars#show", as: :car
+
+  # Cart routes
+  get "cart", to: "cart#show", as: :cart
+  post "cart/add", to: "cart#add_item", as: :add_to_cart
+  delete "cart/remove/:id", to: "cart#remove_item", as: :remove_from_cart
+  patch "cart/update/:id", to: "cart#update_quantity", as: :update_cart_quantity
+
+  # Checkout routes
+  get "checkout", to: "checkout#show", as: :checkout
+  post "checkout", to: "checkout#create", as: :create_order
+
+  # Order routes
+  get "orders/processing", to: "orders#processing", as: :processing_order
+  get "orders/:id", to: "orders#show", as: :order
 end

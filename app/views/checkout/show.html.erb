@@ -1,0 +1,169 @@
+<% content_for :title, "Commande - Les voitures bon marché d'Henri" %>
+
+<div class="checkout-page">
+  <div class="container">
+    <div class="checkout-header">
+      <h1 class="page-title">Finaliser votre commande</h1>
+      <p class="checkout-subtitle">Plus qu'une étape avant de recevoir votre merveille française!</p>
+    </div>
+
+    <div class="checkout-content">
+      <div class="checkout-form-section">
+        <%= form_with model: @order, url: create_order_path, local: true, class: "checkout-form" do |form| %>
+          <div class="form-section">
+            <h3 class="section-title">
+              <span class="section-number">1</span>
+              Informations personnelles
+            </h3>
+
+            <div class="form-row">
+              <div class="form-group">
+                <%= form.label :customer_name, "Nom complet *", class: "form-label" %>
+                <%= form.text_field :customer_name,
+                    class: "form-input",
+                    placeholder: "Jean Dupont",
+                    required: true %>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <%= form.label :customer_email, "Adresse email *", class: "form-label" %>
+                <%= form.email_field :customer_email,
+                    class: "form-input",
+                    placeholder: "jean.dupont@email.fr",
+                    required: true %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3 class="section-title">
+              <span class="section-number">2</span>
+              Adresse de livraison
+            </h3>
+
+            <div class="form-row">
+              <div class="form-group full-width">
+                <%= form.label :customer_address, "Adresse complète *", class: "form-label" %>
+                <%= form.text_area :customer_address,
+                    class: "form-textarea",
+                    placeholder: "123 Rue de la Paix\n75001 Paris\nFrance",
+                    rows: 4,
+                    required: true %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3 class="section-title">
+              <span class="section-number">3</span>
+              Mode de paiement
+            </h3>
+
+            <div class="payment-options">
+              <div class="payment-option">
+                <%= form.radio_button :payment_method, "carte_bancaire",
+                    id: "payment_card",
+                    checked: true,
+                    class: "payment-radio" %>
+                <%= form.label :payment_method, "Carte bancaire",
+                    for: "payment_card",
+                    class: "payment-label" %>
+                <div class="payment-icons">💳 Visa, Mastercard, CB</div>
+              </div>
+
+              <div class="payment-option">
+                <%= form.radio_button :payment_method, "paypal",
+                    id: "payment_paypal",
+                    class: "payment-radio" %>
+                <%= form.label :payment_method, "PayPal",
+                    for: "payment_paypal",
+                    class: "payment-label" %>
+                <div class="payment-icons">💰 Paiement sécurisé PayPal</div>
+              </div>
+
+              <div class="payment-option">
+                <%= form.radio_button :payment_method, "virement",
+                    id: "payment_transfer",
+                    class: "payment-radio" %>
+                <%= form.label :payment_method, "Virement bancaire",
+                    for: "payment_transfer",
+                    class: "payment-label" %>
+                <div class="payment-icons">🏦 Virement SEPA</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="terms-section">
+              <label class="checkbox-container">
+                <input type="checkbox" required class="terms-checkbox">
+                <span class="checkmark"></span>
+                J'accepte les <a href="#" class="terms-link">conditions générales de vente</a>
+                et la <a href="#" class="terms-link">politique de confidentialité</a> *
+              </label>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <%= form.submit "Confirmer la commande", class: "btn btn-primary btn-large submit-btn" %>
+            <%= link_to "Retour au panier", cart_path, class: "btn btn-secondary back-btn" %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="order-summary-section">
+        <div class="summary-card">
+          <h3>Récapitulatif de commande</h3>
+
+          <div class="order-items">
+            <% @cart_items.each do |cart_item| %>
+              <div class="order-item">
+                <div class="item-info">
+                  <div class="item-name"><%= cart_item.car.name %></div>
+                  <div class="item-details">
+                    Couleur: <%= cart_item.car.color %> • Quantité: <%= cart_item.quantity %>
+                  </div>
+                </div>
+                <div class="item-total">
+                  <%= cart_item.formatted_total_price %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+
+          <hr class="summary-divider">
+
+          <div class="summary-line">
+            <span>Sous-total:</span>
+            <span><%= number_to_currency(@total, unit: "€", separator: ",", delimiter: " ") %></span>
+          </div>
+
+          <div class="summary-line">
+            <span>Livraison:</span>
+            <span class="free">Gratuite! 🎉</span>
+          </div>
+
+          <div class="summary-line">
+            <span>TVA (20%):</span>
+            <span>Incluse</span>
+          </div>
+
+          <hr class="summary-divider">
+
+          <div class="summary-total">
+            <span>Total à payer:</span>
+            <span><%= number_to_currency(@total, unit: "€", separator: ",", delimiter: " ") %></span>
+          </div>
+
+          <div class="security-info">
+            <div class="security-badge">🔒 Paiement 100% sécurisé</div>
+            <div class="security-badge">🚚 Livraison express gratuite</div>
+            <div class="security-badge">💯 Satisfaction garantie</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

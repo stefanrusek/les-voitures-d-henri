@@ -1,0 +1,142 @@
+<% content_for :title, "Panier - Les voitures bon marché d'Henri" %>
+
+<div class="cart-page">
+  <div class="container">
+    <div class="cart-header">
+      <h1 class="page-title">Votre Panier</h1>
+      <p class="cart-subtitle">Vos futurs trésors automobiles vous attendent!</p>
+    </div>
+
+    <% if @cart_items.any? %>
+      <div class="cart-content">
+        <div class="cart-items">
+          <% @cart_items.each do |cart_item| %>
+            <div class="cart-item">
+              <div class="item-image">
+                <div class="mini-car">🚗</div>
+              </div>
+
+              <div class="item-details">
+                <h3 class="item-name"><%= cart_item.car.name %></h3>
+                <p class="item-description"><%= truncate(cart_item.car.description, length: 100) %></p>
+                <div class="item-specs">
+                  <span class="spec">Couleur: <%= cart_item.car.color %></span>
+                </div>
+              </div>
+
+              <div class="item-quantity">
+                <%= form_with url: update_cart_quantity_path(cart_item), method: :patch, local: true, class: "quantity-form" do |form| %>
+                  <label for="quantity_<%= cart_item.id %>" class="quantity-label">Quantité:</label>
+                  <%= form.number_field :quantity,
+                      value: cart_item.quantity,
+                      min: 1, max: 10,
+                      id: "quantity_#{cart_item.id}",
+                      class: "quantity-input",
+                      onchange: "this.form.submit();" %>
+                <% end %>
+              </div>
+
+              <div class="item-price">
+                <div class="unit-price">
+                  <%= cart_item.car.formatted_price %> / unité
+                </div>
+                <div class="total-price">
+                  <%= cart_item.formatted_total_price %>
+                </div>
+              </div>
+
+              <div class="item-actions">
+                <%= link_to remove_from_cart_path(cart_item),
+                    method: :delete,
+                    class: "remove-btn",
+                    confirm: "Êtes-vous sûr de vouloir retirer cet article?",
+                    title: "Retirer du panier" do %>
+                  🗑️
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="cart-summary">
+          <div class="summary-card">
+            <h3>Résumé de la commande</h3>
+
+            <div class="summary-line">
+              <span>Articles (<%= cart_count %>):</span>
+              <span><%= number_to_currency(@total, unit: "€", separator: ",", delimiter: " ") %></span>
+            </div>
+
+            <div class="summary-line">
+              <span>Livraison:</span>
+              <span class="free">Gratuite! 🎉</span>
+            </div>
+
+            <div class="summary-line">
+              <span>Magie française:</span>
+              <span class="free">Incluse! ✨</span>
+            </div>
+
+            <hr class="summary-divider">
+
+            <div class="summary-total">
+              <span>Total:</span>
+              <span><%= number_to_currency(@total, unit: "€", separator: ",", delimiter: " ") %></span>
+            </div>
+
+            <div class="checkout-actions">
+              <%= link_to "Procéder au Paiement", checkout_path, class: "btn btn-primary btn-large checkout-btn" %>
+              <%= link_to "Continuer les Achats", car_path, class: "btn btn-secondary continue-shopping-btn" %>
+            </div>
+
+            <div class="security-badges">
+              <div class="badge">🔒 Paiement Sécurisé</div>
+              <div class="badge">🚚 Livraison Rapide</div>
+              <div class="badge">💯 Satisfaction Garantie</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <div class="empty-cart">
+        <div class="empty-cart-icon">🛒</div>
+        <h2>Votre panier est vide</h2>
+        <p>Il est temps de découvrir notre magnifique voiture!</p>
+        <%= link_to "Découvrir Notre Voiture", car_path, class: "btn btn-primary btn-large" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<% if @cart_items.any? %>
+  <div class="cart-benefits">
+    <div class="container">
+      <h3>Pourquoi choisir Henri?</h3>
+      <div class="benefits-grid">
+        <div class="benefit">
+          <div class="benefit-icon">🎯</div>
+          <h4>Choix Parfait</h4>
+          <p>Une seule voiture, mais LA bonne voiture!</p>
+        </div>
+
+        <div class="benefit">
+          <div class="benefit-icon">🚀</div>
+          <h4>Livraison Express</h4>
+          <p>Votre nouvelle vie commence demain!</p>
+        </div>
+
+        <div class="benefit">
+          <div class="benefit-icon">💎</div>
+          <h4>Qualité Premium</h4>
+          <p>L'excellence française à votre service!</p>
+        </div>
+
+        <div class="benefit">
+          <div class="benefit-icon">🔄</div>
+          <h4>Garantie Bonheur</h4>
+          <p>Satisfait ou... encore plus satisfait!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

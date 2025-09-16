@@ -1,0 +1,89 @@
+<% content_for :title, "Traitement en cours - Les voitures bon marché d'Henri" %>
+
+<div class="processing-page">
+  <div class="container">
+    <div class="processing-content">
+      <div class="processing-animation">
+        <div class="spinner">
+          <div class="spinner-ring"></div>
+          <div class="spinner-ring"></div>
+          <div class="spinner-ring"></div>
+        </div>
+        <div class="car-animation">🚗</div>
+      </div>
+
+      <h1 class="processing-title">Traitement de votre commande en cours...</h1>
+      <p class="processing-subtitle">Henri prépare personnellement votre voiture magnifique!</p>
+
+      <div class="processing-steps">
+        <div class="step active" id="step-1">
+          <div class="step-icon">✅</div>
+          <div class="step-text">Commande reçue</div>
+        </div>
+
+        <div class="step" id="step-2">
+          <div class="step-icon">🔧</div>
+          <div class="step-text">Préparation en cours</div>
+        </div>
+
+        <div class="step" id="step-3">
+          <div class="step-icon">🎨</div>
+          <div class="step-text">Finitions de luxe</div>
+        </div>
+
+        <div class="step" id="step-4">
+          <div class="step-icon">📦</div>
+          <div class="step-text">Emballage soigné</div>
+        </div>
+      </div>
+
+      <div class="processing-messages">
+        <div class="message active" id="message-1">
+          Henri examine votre commande avec attention...
+        </div>
+        <div class="message" id="message-2">
+          Sélection des meilleurs composants français...
+        </div>
+        <div class="message" id="message-3">
+          Application de la magie française...
+        </div>
+        <div class="message" id="message-4">
+          Finalisation de votre chef-d'œuvre...
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  let currentStep = 1;
+  const totalSteps = 4;
+  const stepDuration = 750; // 3 seconds / 4 steps = 750ms per step
+
+  function activateStep(stepNumber) {
+    // Activate step
+    document.getElementById(`step-${stepNumber}`).classList.add('active');
+
+    // Activate message
+    document.querySelectorAll('.message').forEach(msg => msg.classList.remove('active'));
+    document.getElementById(`message-${stepNumber}`).classList.add('active');
+  }
+
+  function processSteps() {
+    if (currentStep <= totalSteps) {
+      activateStep(currentStep);
+      currentStep++;
+      setTimeout(processSteps, stepDuration);
+    } else {
+      // Redirect to order confirmation after 3 seconds
+      setTimeout(() => {
+        window.location.href = '<%= order_path(@order) %>';
+      }, 500);
+    }
+  }
+
+  // Start the process after a short delay
+  setTimeout(processSteps, 500);
+});
+</script>

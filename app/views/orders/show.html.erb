@@ -1,0 +1,176 @@
+<% content_for :title, "Commande confirmée - Les voitures bon marché d'Henri" %>
+
+<div class="order-confirmation-page">
+  <div class="container">
+    <div class="confirmation-header">
+      <div class="success-icon">🎉</div>
+      <h1 class="confirmation-title">Félicitations!</h1>
+      <h2 class="confirmation-subtitle">Votre commande a été confirmée avec succès</h2>
+      <p class="order-number">Numéro de commande: <strong><%= @order.order_number %></strong></p>
+    </div>
+
+    <div class="confirmation-content">
+      <div class="order-details-section">
+        <div class="details-card">
+          <h3>Détails de votre commande</h3>
+
+          <div class="order-info">
+            <div class="info-row">
+              <span class="label">Date de commande:</span>
+              <span class="value"><%= @order.created_at.strftime("%d/%m/%Y à %H:%M") %></span>
+            </div>
+
+            <div class="info-row">
+              <span class="label">Statut:</span>
+              <span class="value status-badge">Confirmée ✅</span>
+            </div>
+
+            <div class="info-row">
+              <span class="label">Mode de paiement:</span>
+              <span class="value"><%= @order.payment_method.humanize %></span>
+            </div>
+          </div>
+
+          <h4>Articles commandés</h4>
+          <div class="ordered-items">
+            <% @order_items.each do |order_item| %>
+              <div class="ordered-item">
+                <div class="item-image">
+                  <div class="mini-car">🚗</div>
+                </div>
+
+                <div class="item-details">
+                  <div class="item-name"><%= order_item.car.name %></div>
+                  <div class="item-specs">
+                    Couleur: <%= order_item.car.color %> • Quantité: <%= order_item.quantity %>
+                  </div>
+                  <div class="item-description">
+                    <%= truncate(order_item.car.description, length: 80) %>
+                  </div>
+                </div>
+
+                <div class="item-pricing">
+                  <div class="unit-price">
+                    <%= number_to_currency(order_item.price, unit: "€", separator: ",", delimiter: " ") %> / unité
+                  </div>
+                  <div class="total-price">
+                    <%= order_item.formatted_total_price %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="order-total">
+            <div class="total-line">
+              <span>Total de la commande:</span>
+              <span class="total-amount"><%= @order.formatted_total_amount %></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="customer-info-section">
+        <div class="info-card">
+          <h3>Informations de livraison</h3>
+
+          <div class="customer-details">
+            <div class="detail-group">
+              <strong>Nom:</strong>
+              <span><%= @order.customer_name %></span>
+            </div>
+
+            <div class="detail-group">
+              <strong>Email:</strong>
+              <span><%= @order.customer_email %></span>
+            </div>
+
+            <div class="detail-group">
+              <strong>Adresse de livraison:</strong>
+              <div class="address">
+                <%= simple_format(@order.customer_address) %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="next-steps-card">
+          <h3>Prochaines étapes</h3>
+
+          <div class="steps-timeline">
+            <div class="timeline-step completed">
+              <div class="step-marker">✅</div>
+              <div class="step-content">
+                <strong>Commande confirmée</strong>
+                <p>Votre commande a été reçue et confirmée</p>
+              </div>
+            </div>
+
+            <div class="timeline-step">
+              <div class="step-marker">📧</div>
+              <div class="step-content">
+                <strong>Email de confirmation</strong>
+                <p>Vous recevrez un email de confirmation sous peu</p>
+              </div>
+            </div>
+
+            <div class="timeline-step">
+              <div class="step-marker">🔧</div>
+              <div class="step-content">
+                <strong>Préparation</strong>
+                <p>Henri prépare personnellement votre voiture</p>
+              </div>
+            </div>
+
+            <div class="timeline-step">
+              <div class="step-marker">🚚</div>
+              <div class="step-content">
+                <strong>Livraison</strong>
+                <p>Livraison express gratuite sous 24-48h</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="confirmation-actions">
+      <div class="action-buttons">
+        <%= link_to "Retour à l'accueil", root_path, class: "btn btn-primary" %>
+        <%= link_to "Voir notre voiture", car_path, class: "btn btn-secondary" %>
+      </div>
+
+      <div class="contact-info">
+        <p>Une question sur votre commande?</p>
+        <p>Contactez Henri: <a href="mailto:henri@voitures-bon-marche.fr">henri@voitures-bon-marche.fr</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="celebration-section">
+  <div class="container">
+    <h3>Bienvenue dans la famille Henri! 🎊</h3>
+    <p>Vous venez de faire l'acquisition de bien plus qu'une voiture - vous avez acheté un style de vie français!</p>
+
+    <div class="celebration-benefits">
+      <div class="benefit">
+        <div class="benefit-icon">🇫🇷</div>
+        <h4>Élégance française</h4>
+        <p>Votre nouveau style de vie commence maintenant</p>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-icon">🌟</div>
+        <h4>Expérience unique</h4>
+        <p>Préparez-vous à vivre des moments extraordinaires</p>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-icon">💎</div>
+        <h4>Qualité premium</h4>
+        <p>L'excellence française à votre service</p>
+      </div>
+    </div>
+  </div>
+</div>

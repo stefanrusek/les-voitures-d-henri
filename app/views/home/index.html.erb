@@ -1,0 +1,108 @@
+<% content_for :title, "Accueil - Les voitures bon marché d'Henri" %>
+
+<div class="hero-section">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">Bienvenue chez Henri!</h1>
+        <h2 class="hero-subtitle">L'automobile française par excellence</h2>
+        <p class="hero-description">
+          Découvrez <strong>La Voiture Magnifique</strong> - une merveille d'ingénierie qui transformera
+          votre façon de voir la route. Élégante, mystérieuse, et disponible dans la couleur la plus
+          sophistiquée qui soit : le noir profond.
+        </p>
+        <div class="hero-buttons">
+          <%= link_to "Découvrir Notre Voiture", car_path, class: "btn btn-primary" %>
+          <%= link_to "Voir le Panier", cart_path, class: "btn btn-secondary" %>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="car-placeholder">
+          🚗
+          <p>La Voiture Magnifique</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="features-section">
+  <div class="container">
+    <h2 class="section-title">Pourquoi choisir Henri?</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🇫🇷</div>
+        <h3>Tradition Française</h3>
+        <p>Plus de 50 ans d'expertise dans l'automobile française. Henri connaît les voitures comme personne!</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">⚫</div>
+        <h3>Couleur Exclusive</h3>
+        <p>Noir profond, élégant et intemporel. Comme disait Henry Ford, mais en français!</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">💎</div>
+        <h3>Qualité Premium</h3>
+        <p>Une seule voiture, mais quelle voiture! Chaque détail a été pensé pour votre bonheur.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🚀</div>
+        <h3>Livraison Express</h3>
+        <p>Commandez aujourd'hui, roulez demain! (Enfin, peut-être après-demain, on est français quand même.)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="testimonials-section">
+  <div class="container">
+    <h2 class="section-title">Ce que disent nos clients</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-content">
+          <p>"Cette voiture a littéralement changé ma vie! Depuis que je la conduis, je parle couramment français,
+             je cuisine comme un chef étoilé, et même mon chat me respecte davantage!"</p>
+        </div>
+        <div class="testimonial-author">
+          <strong>Marie-Claire Dubois</strong>
+          <span>Propriétaire heureuse depuis 2023</span>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-content">
+          <p>"Je pensais acheter une simple voiture, mais j'ai reçu un mode de vie! Maintenant je porte un béret,
+             je mange du fromage tous les jours, et j'ai mystérieusement développé un accent parisien."</p>
+        </div>
+        <div class="testimonial-author">
+          <strong>Jean-Baptiste Martin</strong>
+          <span>Client transformé</span>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-content">
+          <p>"Cette voiture ne se contente pas de vous emmener d'un point A à un point B. Elle vous emmène
+             vers une nouvelle dimension de sophistication et d'élégance française!"</p>
+        </div>
+        <div class="testimonial-author">
+          <strong>Amélie Rousseau</strong>
+          <span>Ambassadrice du style français</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cta-section">
+  <div class="container">
+    <div class="cta-content">
+      <h2>Prêt pour l'aventure française?</h2>
+      <p>Ne laissez pas passer cette opportunité unique de posséder LA voiture qui changera votre vie!</p>
+      <%= link_to "Voir Notre Voiture Magnifique", car_path, class: "btn btn-primary btn-large" %>
+    </div>
+  </div>
+</div>

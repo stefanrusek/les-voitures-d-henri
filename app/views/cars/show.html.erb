@@ -1,0 +1,146 @@
+<% content_for :title, "#{@car.name} - Les voitures bon marché d'Henri" %>
+
+<div class="product-hero">
+  <div class="container">
+    <div class="product-content">
+      <div class="product-image">
+        <div class="car-showcase">
+          🚗
+          <div class="car-details-overlay">
+            <span class="car-color">Couleur: <%= @car.color %></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-info">
+        <h1 class="product-title"><%= @car.name %></h1>
+        <div class="product-price"><%= @car.formatted_price %></div>
+
+        <div class="product-description">
+          <p><%= @car.description %></p>
+        </div>
+
+        <%= form_with url: add_to_cart_path, method: :post, local: true, class: "add-to-cart-form" do |form| %>
+          <%= form.hidden_field :car_id, value: @car.id %>
+
+          <div class="quantity-selector">
+            <%= form.label :quantity, "Quantité:", class: "quantity-label" %>
+            <%= form.number_field :quantity, value: 1, min: 1, max: 10, class: "quantity-input" %>
+          </div>
+
+          <%= form.submit "Ajouter au Panier", class: "btn btn-primary btn-large add-to-cart-btn" %>
+        <% end %>
+
+        <div class="product-features">
+          <h3>Caractéristiques exceptionnelles:</h3>
+          <ul>
+            <li>🎨 Couleur exclusive: <%= @car.color %> profond</li>
+            <li>🇫🇷 Fabriqué avec l'art de vivre français</li>
+            <li>✨ Design intemporel et élégant</li>
+            <li>🚀 Performance qui dépasse vos rêves</li>
+            <li>💎 Finitions de qualité premium</li>
+            <li>🌟 Garantie satisfaction à vie</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="product-reviews">
+  <div class="container">
+    <h2 class="section-title">Avis de nos clients enchantés</h2>
+
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-rating">⭐⭐⭐⭐⭐</div>
+        <h4>Une transformation complète de ma vie!</h4>
+        <p>"Depuis que j'ai acheté La Voiture Magnifique, ma vie a pris une tournure extraordinaire!
+           Non seulement je me déplace avec style, mais j'ai aussi développé un goût raffiné pour
+           les fromages français, je parle couramment l'italien (allez savoir pourquoi), et même
+           mes plantes d'intérieur poussent mieux!"</p>
+        <div class="review-author">
+          <strong>Sophie Martineau</strong>
+          <span>Propriétaire depuis 6 mois</span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-rating">⭐⭐⭐⭐⭐</div>
+        <h4>Plus qu'une voiture, un mode de vie!</h4>
+        <p>"Cette voiture a littéralement changé ma personnalité! Avant, j'étais timide et réservé.
+           Maintenant, je porte des bérets, je cite Voltaire au petit-déjeuner, et j'ai mystérieusement
+           acquis la capacité de faire des croissants parfaits. Mes voisins pensent que j'ai déménagé
+           à Paris sans quitter ma ville!"</p>
+        <div class="review-author">
+          <strong>Pierre Dubois</strong>
+          <span>Client transformé</span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-rating">⭐⭐⭐⭐⭐</div>
+        <h4>Un investissement dans le bonheur!</h4>
+        <p>"Je pensais acheter une simple voiture, mais j'ai reçu bien plus! Cette merveille noire
+           a non seulement amélioré mes trajets quotidiens, mais elle a aussi attiré l'attention
+           de mon crush, m'a valu une promotion au travail, et même mon chat me traite avec plus
+           de respect. C'est de la magie française pure!"</p>
+        <div class="review-author">
+          <strong>Camille Rousseau</strong>
+          <span>Ambassadrice du bonheur</span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-rating">⭐⭐⭐⭐⭐</div>
+        <h4>Une expérience transcendante!</h4>
+        <p>"Cette voiture ne se contente pas de vous transporter physiquement, elle vous élève
+           spirituellement! Depuis que je la conduis, j'ai développé une appréciation profonde
+           pour l'art, je compose de la poésie pendant les embouteillages, et j'ai même commencé
+           à rêver en français. Henri n'est pas un vendeur, c'est un magicien!"</p>
+        <div class="review-author">
+          <strong>Antoine Moreau</strong>
+          <span>Poète automobile</span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-rating">⭐⭐⭐⭐⭐</div>
+        <h4>La voiture qui change tout!</h4>
+        <p>"Attention: cette voiture est addictive! Depuis que je l'ai, je ne peux plus conduire
+           autre chose. Elle a transformé mes trajets en aventures épiques, mes courses en
+           expéditions glamour, et même aller chercher le pain est devenu un événement social.
+           Les autres conducteurs me saluent avec respect et envie!"</p>
+        <div class="review-author">
+          <strong>Isabelle Laurent</strong>
+          <span>Accro au style français</span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-rating">⭐⭐⭐⭐⭐</div>
+        <h4>Un miracle sur roues!</h4>
+        <p>"Cette voiture a des pouvoirs surnaturels! Non seulement elle me mène toujours à
+           destination avec style, mais elle semble aussi attirer la chance. Depuis que je la
+           conduis, j'ai gagné trois concours, trouvé l'amour, et même ma grand-mère dit que
+           j'ai l'air plus intelligent. C'est inexplicable mais merveilleux!"</p>
+        <div class="review-author">
+          <strong>Maxime Petit</strong>
+          <span>Chanceux professionnel</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="product-cta">
+  <div class="container">
+    <div class="cta-content">
+      <h2>Ne laissez pas passer cette chance unique!</h2>
+      <p>Rejoignez la famille des propriétaires heureux de La Voiture Magnifique</p>
+      <%= link_to "Ajouter au Panier Maintenant", "#",
+          onclick: "document.querySelector('.add-to-cart-btn').click(); return false;",
+          class: "btn btn-primary btn-large" %>
+    </div>
+  </div>
+</div>
